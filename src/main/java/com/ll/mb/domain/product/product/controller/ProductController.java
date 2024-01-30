@@ -41,8 +41,8 @@ public class ProductController {
     @GetMapping("/list")
     public String showList(
             @RequestParam(value = "kwType", defaultValue = "name") List<String> kwTypes,
-            @RequestParam(defaultValue = "") String kw,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(value = "kw", defaultValue = "") String kw,
+            @RequestParam(value = "page", defaultValue = "1") int page,
             Model model
     ) {
         List<Sort.Order> sorts = new ArrayList<>();
@@ -67,8 +67,8 @@ public class ProductController {
     @GetMapping("/myList")
     public String showMyList(
             @RequestParam(value = "kwType", defaultValue = "name") List<String> kwTypes,
-            @RequestParam(defaultValue = "") String kw,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(value = "kw",defaultValue = "") String kw,
+            @RequestParam(value = "page",defaultValue = "1") int page,
             Model model
     ) {
         List<Sort.Order> sorts = new ArrayList<>();
@@ -99,8 +99,8 @@ public class ProductController {
     @PostMapping("/{id}/bookmark")
     @PreAuthorize("isAuthenticated()")
     public String bookmark(
-            @PathVariable long id,
-            @RequestParam(defaultValue = "/") String redirectUrl
+            @PathVariable("id") long id,
+            @RequestParam(value = "redirectUrl", defaultValue = "/") String redirectUrl
     ) {
         Product product = productService.findById(id).orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
         productService.bookmark(rq.getMember(), product);
@@ -111,8 +111,8 @@ public class ProductController {
     @DeleteMapping("/{id}/cancelBookmark")
     @PreAuthorize("isAuthenticated()")
     public String cancelBookmark(
-            @PathVariable long id,
-            @RequestParam(defaultValue = "/") String redirectUrl
+            @PathVariable("id") long id,
+            @RequestParam(value = "redirectUrl", defaultValue = "/") String redirectUrl
     ) {
         Product product = productService.findById(id).orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
         productService.cancelBookmark(rq.getMember(), product);

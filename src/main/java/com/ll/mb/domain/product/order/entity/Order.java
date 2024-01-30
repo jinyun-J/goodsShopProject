@@ -88,10 +88,14 @@ public class Order extends BaseTime {
     }
 
     public String getName() {
+        if (orderItems.isEmpty()) {
+            return "제품 이름 없음"; // 또는 다른 적절한 기본값
+        }
+
         String name = orderItems.get(0).getProduct().getName();
 
         if (orderItems.size() > 1) {
-            name += " 외 %d건".formatted(orderItems.size() - 1);
+            name += " 외 " + (orderItems.size() - 1) + "건";
         }
 
         return name;

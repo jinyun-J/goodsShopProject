@@ -30,8 +30,8 @@ public class BookController {
     @GetMapping("/list")
     public String showList(
             @RequestParam(value = "kwType", defaultValue = "title") List<String> kwTypes,
-            @RequestParam(defaultValue = "") String kw,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(value = "kw", defaultValue = "") String kw,
+            @RequestParam(value = "page", defaultValue = "1") int page,
             Model model
     ) {
         List<Sort.Order> sorts = new ArrayList<>();
@@ -57,8 +57,8 @@ public class BookController {
     @GetMapping("/myList")
     public String showMyList(
             @RequestParam(value = "kwType", defaultValue = "title") List<String> kwTypes,
-            @RequestParam(defaultValue = "") String kw,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(value = "kw", defaultValue = "") String kw,
+            @RequestParam(value = "page", defaultValue = "1") int page,
             Model model
     ) {
         List<Sort.Order> sorts = new ArrayList<>();

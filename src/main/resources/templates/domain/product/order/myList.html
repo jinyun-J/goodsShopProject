@@ -29,21 +29,21 @@
     </form>
 
     <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <li class="card bg-base-100 shadow-xl" th:each="order : ${orderPage.content}">
+        <li class="card bg-base-100 shadow-xl" th:each="order : ${orderPage.content}" th:if="${order != null}">
             <div class="card-body">
                 <h2 class="card-title">
                     <span th:text="${order.id}"></span>
                     <span>:</span>
-                    <span th:text="${order.name}"></span>
+                    <span th:text="${order.name}" th:if="${order.name != null}"></span>
                 </h2>
                 <div>
                     <div>
                         <span>코드:</span>
-                        <span th:text="${order.code}"></span>
+                        <span th:text="${order.code}" th:if="${order.code != null}"></span>
                     </div>
                     <div>
                         <span>결제금액:</span>
-                        <span th:text="${order.calcPayPrice}"></span>
+                        <span th:text="${order.calcPayPrice}" th:if="${order.calcPayPrice != null}"></span>
                     </div>
                     <div>결제상태: [[${order.forPrintPayStatus}]]</div>
                     <div>취소상태: [[${order.forPrintCancelStatus}]]</div>

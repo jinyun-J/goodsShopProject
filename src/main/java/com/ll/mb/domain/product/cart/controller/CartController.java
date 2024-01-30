@@ -41,8 +41,8 @@ public class CartController {
     @PostMapping("/add/{id}")
     @PreAuthorize("isAuthenticated()")
     public String add(
-            @PathVariable long id,
-            @RequestParam(defaultValue = "/") String redirectUrl
+            @PathVariable("id") long id,
+            @RequestParam(value = "redirectUrl", defaultValue = "/") String redirectUrl
     ) {
         Product product = productServie.findById(id).orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
         cartService.addItem(rq.getMember(), product);
@@ -53,8 +53,8 @@ public class CartController {
     @DeleteMapping("/remove/{id}")
     @PreAuthorize("isAuthenticated()")
     public String remove(
-            @PathVariable long id,
-            @RequestParam(defaultValue = "/") String redirectUrl
+            @PathVariable("id") long id,
+            @RequestParam(value = "redirectUrl", defaultValue = "/") String redirectUrl
     ) {
         Product product = productServie.findById(id).orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
         cartService.removeItem(rq.getMember(), product);

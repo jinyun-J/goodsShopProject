@@ -45,7 +45,7 @@ public class OrderController {
 
     @PostMapping("/directMakeOrder/{productId}")
     public String directMakeOrder(
-            @PathVariable long productId
+            @PathVariable("productId") long productId
     ) {
         Product product = productService.findById(productId)
                 .orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
@@ -64,8 +64,8 @@ public class OrderController {
 
     @DeleteMapping("/{id}/cancel")
     public String cancel(
-            @PathVariable long id,
-            String redirectUrl
+            @PathVariable("id") long id,
+            @RequestParam(value = "redirectUrl", defaultValue = "/") String redirectUrl
     ) {
         Order order = orderService.findById(id).orElse(null);
 
@@ -88,10 +88,10 @@ public class OrderController {
 
     @GetMapping("/myList")
     public String showMyList(
-            @RequestParam(defaultValue = "1") int page,
-            Boolean payStatus,
-            Boolean cancelStatus,
-            Boolean refundStatus
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "payStatus", required = false) Boolean payStatus,
+            @RequestParam(value = "cancelStatus", required = false) Boolean cancelStatus,
+            @RequestParam(value = "refundStatus", required = false) Boolean refundStatus
     ) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("id"));
@@ -105,7 +105,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public String showDetail(@PathVariable long id, Model model) {
+    public String showDetail(@PathVariable("id") long id, Model model) {
         Order order = orderService.findById(id).orElse(null);
 
         if (order == null) {
@@ -140,7 +140,7 @@ public class OrderController {
     }
 
     @PostMapping("/{id}/payByCash")
-    public String payByCash(@PathVariable long id) {
+    public String payByCash(@PathVariable("id") long id) {
         Order order = orderService.findById(id).orElse(null);
 
         if (order == null) {
