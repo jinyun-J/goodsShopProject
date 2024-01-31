@@ -23,13 +23,16 @@
 </head>
 <body class="p-5">
 
+<body class="p-5">
+<!-- Tailwind CSS 및 DaisyUI 적용 -->
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.23/dist/full.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div th:if="${@rq.login}" class="flex items-center gap-2">
-    <img class="w-10 rounded-full" th:src="${@rq.profileImgUrl}">
-    <a href="/member/me">
-        <span th:text="${@rq.member.nickname}"></span>님 환영합니다.
+<!-- 사용자 프로필 및 환영 메시지 부분 -->
+<div class="flex items-center gap-2 p-4 border-b border-gray-200">
+    <img class="w-10 h-10 rounded-full" th:src="${@rq.profileImgUrl}" alt="Profile Image">
+    <a href="/" class="text-lg font-medium text-gray-700 hover:text-gray-900">
+       Goods Shop
     </a>
 </div>
 

@@ -3,28 +3,33 @@
 
 <head>
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE" th:text="${@appConfig.siteName}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-gray-100">
 
-<header layout:fragment="header">
-    <h1 th:text="|${@appConfig.siteName}|"></h1>
-
-    <a class="btn btn-link" href="/">홈</a>
-    <a class="btn btn-link" href="/book/list">책</a>
-    <a class="btn btn-link" href="/product/list">상품</a>
-    <a class="btn btn-link" th:if="${@rq.admin}" href="/adm">관리자 홈</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/product/bookmarkList">찜 상품</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/cart/list">장바구니</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/order/myList">주문</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/member/logout">로그아웃</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/book/myList">내 책</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/product/myList">내 상품</a>
-    <a class="btn btn-link" th:if="${@rq.login}" href="/member/logout">로그아웃</a>
-    <a class="btn btn-link" th:if="${@rq.logout}" href="/member/login">로그인</a>
-    <a class="btn btn-link" th:if="${@rq.logout}" href="/member/join">회원가입</a>
+<header layout:fragment="header" class="bg-white shadow-md py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="hidden md:block">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <!-- Navigation Links -->
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" href="/book/list">책</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" href="/product/list">상품</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.admin}" href="/adm">관리자 홈</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.login}" href="/product/bookmarkList">찜 상품</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.login}" href="/cart/list">장바구니</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.login}" href="/order/myList">주문</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.login}" href="/book/myList">내 책</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.login}" href="/product/myList">내 상품</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.login}" href="/member/logout">로그아웃</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.logout}" href="/member/login">로그인</a>
+                    <a class="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium" th:if="${@rq.logout}" href="/member/join">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
 </body>
-
 </html>

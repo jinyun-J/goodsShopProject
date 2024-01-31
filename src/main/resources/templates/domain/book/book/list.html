@@ -1,36 +1,65 @@
-<html layout:decorate="~{global/usrLayout}">
-
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <title>책 리스트</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목록</title>
+    <style>
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
 
+        .product-card {
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .product-card h3 {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-card span {
+            font-size: 0.875rem;
+            color: #555;
+        }
+
+        .product-card .price {
+            color: #000;
+            margin-top: auto;
+            font-weight: bold;
+        }
+    </style>
+</head>
 <body>
 
-<div layout:fragment="content">
-    <form>
-        <div style="display:flex; gap:10px;">
-            <label><input type="checkbox" name="kwType" value="title" th:checked="${kwTypesMap['title']}"><span>책이름</span></label>
-        </div>
-
-        <input type="search" name="kw" placeholder="검색어" th:value="${param.kw}">
-        <input type="submit" value="검색">
-    </form>
-
-    <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <li class="card bg-base-100 shadow-xl" th:each="book : ${itemPage.content}">
-            <th:block th:replace="domain/book/book/fragments/bookListItemCard :: bookListItemCard(${book})"></th:block>
-        </li>
-    </ul>
-
-    <div class="flex justify-center mt-3">
-        <th:block th:with="queryStrBase = ${@rq.getCurrentQueryStringWithoutParam('page')}">
-            <th:block th:replace="global/fragments/pagination :: pagination(${itemPage}, ${queryStrBase}, 3)">
-
-            </th:block>
-        </th:block>
+<div class="products-container">
+    <!-- 상품 목록 반복 -->
+    <div class="product-card">
+        <img src="path-to-image.jpg" alt="상품 이미지">
+        <h3>상품 이름</h3>
+        <span>설명 또는 세부사항</span>
+        <div class="price">가격</div>
     </div>
+    <!-- 여러 상품 카드를 추가하세요 -->
 </div>
 
 </body>
-
 </html>
