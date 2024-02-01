@@ -12,6 +12,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String showMain() {
-        return "domain/home/home/main";
+        return "domain/home/main";
     }
 }

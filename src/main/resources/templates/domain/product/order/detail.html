@@ -53,32 +53,33 @@
 
         <!-- 결제하기 버튼 -->
         <form method="POST" th:action="|/order/${order.id}/payByCash|" onsubmit="submitPayForm(this); return false;">
-            <div>
-                <label>고객 이메일</label>
-                <input type="email" name="customerEmail" placeholder="customer@email.com" class="input input-bordered"
-                       value="test@test.com">
-            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">고객 이메일</label>
+                    <input type="email" name="customerEmail" placeholder="이메일을 입력해주세요" class="mt-1 block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
 
-            <div>
-                <label>고객 이름(실명)</label>
-                <input type="text" name="customerName" placeholder="홍길동" class="input input-bordered" value="홍길동">
-            </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">고객 이름(실명)</label>
+                    <input type="text" name="customerName" placeholder="이름을 입력해주세요" class="mt-1 block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
 
-            <div>
-                <label>고객 휴대전화번호(- 제외)</label>
-                <input type="text" name="customerMobilePhone" placeholder="01012341234" class="input input-bordered"
-                       value="01012341234">
-            </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">고객 휴대전화번호(- 제외)</label>
+                    <input type="text" name="customerMobilePhone" placeholder="-를 제외한 숫자만 입력해주세요" class="mt-1 block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                </div>
 
-            <div>
-                <label>캐시</label>
-                <input type="number" name="useCash" th:max-cash="${order.calcPayPrice > actorRestCash ? actorRestCash : order.calcPayPrice}" th:placeholder="${'0 ~ ' + (order.calcPayPrice > actorRestCash ? actorRestCash : order.calcPayPrice)}" class="input input-bordered">
-                <button type="button" onclick="$(this).prev().val($(this).prev().attr('max-cash'))">전액</button>
-            </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">캐시 사용</label>
+                    <div class="flex mt-1">
+                        <input type="number" name="useCash" placeholder="사용할 캐시를 입력해주세요" class="block w-full bg-gray-100 border-gray-300 rounded-l-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <button type="button" onclick="$(this).prev().val($(this).prev().attr('max-cash'))" class="py-2 px-4 bg-blue-500 text-gray-800 rounded-r-md hover:bg-blue-700 focus:outline-none shadow">전액</button>
+                    </div>
+                </div>
 
-            <div>
-                <label>결제하기</label>
-                <button type="submit" id="payment-button" class="btn btn-primary">결제하기</button>
+                <div>
+                    <button type="submit" id="payment-button" class="w-full py-2 px-4 bg-white text-gray-800 rounded hover:bg-gray-100 focus:outline-none shadow">결제하기</button>
+                </div>
             </div>
         </form>
 

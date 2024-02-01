@@ -23,7 +23,7 @@ public class AdmRebateController {
 
     @GetMapping("/make")
     public String showMake() {
-        return "domain/rebate/rebate/adm/make";
+        return "domain/rebate/adm/make";
     }
 
     @PostMapping("/make")
@@ -46,7 +46,7 @@ public class AdmRebateController {
         model.addAttribute("yearMonth", yearMonth);
         model.addAttribute("items", items);
 
-        return "domain/rebate/rebate/adm/list";
+        return "domain/rebate/adm/list";
     }
 
     @PostMapping("/{id}/rebate")

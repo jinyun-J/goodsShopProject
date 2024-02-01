@@ -26,7 +26,7 @@ public class MemberController {
     @PreAuthorize("isAnonymous()")
     @GetMapping("/join")
     public String showJoin() {
-        return "domain/member/member/join";
+        return "domain/member/join";
     }
 
     @Setter
@@ -51,12 +51,12 @@ public class MemberController {
 
     @GetMapping("/login")
     public String showLogin() {
-        return "domain/member/member/login";
+        return "domain/member/login";
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public String showMe() {
-        return "domain/member/member/me";
+        return "domain/member/me";
     }
 }

@@ -35,7 +35,7 @@ public class ProductController {
 
         rq.attr("productBookmarks", productBookmarks);
 
-        return "domain/product/product/bookmarkList";
+        return "domain/product/bookmarkList";
     }
 
     @GetMapping("/list")
@@ -61,7 +61,7 @@ public class ProductController {
         model.addAttribute("kwTypesMap", kwTypesMap);
         model.addAttribute("page", page);
 
-        return "domain/product/product/list";
+        return "domain/product/list";
     }
 
     @GetMapping("/myList")
@@ -87,7 +87,7 @@ public class ProductController {
         model.addAttribute("kwTypesMap", kwTypesMap);
         model.addAttribute("page", page);
 
-        return "domain/product/product/myList";
+        return "domain/product/myList";
     }
 
     @GetMapping("/{id}")
@@ -104,8 +104,10 @@ public class ProductController {
     ) {
         Product product = productService.findById(id).orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
         productService.bookmark(rq.getMember(), product);
+        System.out.println(redirectUrl);
 
-        return rq.redirect(redirectUrl, null);
+        return "redirect:/product/list";
+//        return rq.redirect(redirectUrl, null);
     }
 
     @DeleteMapping("/{id}/cancelBookmark")
@@ -117,6 +119,8 @@ public class ProductController {
         Product product = productService.findById(id).orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));
         productService.cancelBookmark(rq.getMember(), product);
 
-        return rq.redirect(redirectUrl, null);
+        System.out.println(redirectUrl);
+
+        return "redirect:/product/list";
     }
 }

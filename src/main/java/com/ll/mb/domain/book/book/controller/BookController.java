@@ -50,7 +50,7 @@ public class BookController {
         model.addAttribute("kwTypesMap", kwTypesMap);
         model.addAttribute("page", page);
 
-        return "domain/book/book/list";
+        return "domain/book/list";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -77,6 +77,6 @@ public class BookController {
         model.addAttribute("kwTypesMap", kwTypesMap);
         model.addAttribute("page", page);
 
-        return "domain/book/book/list";
+        return "domain/book/list";
     }
 }

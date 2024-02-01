@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorate="~{global/usrLayout}">
+
+<head>
+    <title>상품 리스트</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        <li th:each="productBookmark : ${productBookmarks}" class="card bg-white shadow-lg rounded-lg overflow-hidden">
+            <th:block th:replace="domain/product/fragments/productListItemCard :: productListItemCard(${productBookmark.product})"></th:block>
+        </li>
+    </ul>
+</div>
+
+</body>
+
+</html>
