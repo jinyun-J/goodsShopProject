@@ -111,3 +111,57 @@ $(function () {
         $(el).attr('onclick-after', onclick);
     });
 });
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.p-4 {
+    padding: 1rem; /* 16px */
+}
+
+.border-b {
+    border-bottom: 1px solid #e2e8f0; /* Tailwind CSS의 gray-200 */
+}
+
+.border-gray-200 {
+    border-color: #e2e8f0;
+}
+
+.text-lg {
+    font-size: 1.125rem; /* 18px */
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.text-gray-700 {
+    color: #4a5568; /* Tailwind CSS의 gray-700 */
+}
+
+.hover\:text-gray-900:hover {
+    color: #1a202c; /* Tailwind CSS의 gray-900 */
+}
+
+.w-10 {
+    width: 2.5rem; /* 40px */
+}
+
+.h-10 {
+    height: 2.5rem; /* 40px */
+}
+
+.rounded-full {
+    border-radius: 50%;
+}

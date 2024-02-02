@@ -27,12 +27,15 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- 사용자 프로필 및 환영 메시지 부분 -->
-<div class="flex items-center gap-2 p-4 border-b border-gray-200">
-    <img class="w-10 h-10 rounded-full" th:src="${@rq.profileImgUrl}" alt="Profile Image">
-    <a href="/" class="text-lg font-medium text-gray-700 hover:text-gray-900">
-       Goods Shop
+<div class="header-container">
+    <a href="/" class="logo">
+        Goods Shop
+    </a>
+    <a href="/member/me" class="profile-image">
+        <img class="rounded-full" th:src="${@rq.profileImgUrl}" alt="Profile Image">
     </a>
 </div>
+
 
 <th:block layout:fragment="header"></th:block>
 
