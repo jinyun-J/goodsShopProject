@@ -59,10 +59,10 @@ public class NotProd {
         Book book5 = bookService.createBook(memberUser3, "책 제목 5", "책 내용 5", 15_000, true);
         Book book6 = bookService.createBook(memberUser3, "책 제목 6", "책 내용 6", 20_000, true);
 
-        Product product1 = productService.createProduct(book3, true);
-        Product product2 = productService.createProduct(book4, true);
-        Product product3 = productService.createProduct(book5, true);
-        Product product4 = productService.createProduct(book5, true);
+        Product product1 = productService.createProduct(book3, true, null);
+        Product product2 = productService.createProduct(book4, true, null);
+        Product product3 = productService.createProduct(book5, true, null);
+        Product product4 = productService.createProduct(book5, true, null);
 
         cartService.addItem(memberUser1, product1);
         cartService.addItem(memberUser1, product2);
