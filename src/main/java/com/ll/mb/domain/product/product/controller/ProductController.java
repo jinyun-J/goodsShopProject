@@ -34,21 +34,23 @@ public class ProductController {
 
     @Getter
     @Setter
-    public class ProductForm {
+    public static class ProductForm {
         private String name;
-        private String description;
         private long price;
         private boolean published;
         private MultipartFile productImage;
     }
-
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/create")
+    public String CreateProduct(ProductForm productForm) {
+        return "domain/product/form";
+    }
     @PostMapping("/create")
     public String createProduct(@ModelAttribute ProductForm productForm) {
         try {
             // 제품 생성 로직을 처리합니다. 필요한 경우 여기에 추가 데이터 변환 로직을 포함할 수 있습니다.
             productService.createProduct(
                     productForm.getName(),
-                    productForm.getDescription(),
                     productForm.getPrice(),
                     productForm.isPublished(),
                     productForm.getProductImage()
@@ -59,7 +61,6 @@ public class ProductController {
             return "redirect:/product/create?error";
         }
     }
-
 
     @GetMapping("/bookmarkList")
     public String showBookmarkList() {

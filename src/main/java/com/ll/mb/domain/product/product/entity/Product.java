@@ -25,7 +25,7 @@ public class Product extends BaseTime {
     private String name;
     private long price;
     private boolean published;
-    private String description;
+
 
     public boolean isBook() {
         return relTypeCode.equals("book");

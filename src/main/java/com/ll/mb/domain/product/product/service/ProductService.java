@@ -26,21 +26,21 @@ public class ProductService {
     private final ProductBookmarkService productBookmarkService;
     private final GenFileService genFileService; // GenFileService 주입
 
-    public RsData<Product> createProduct(String name, String description, long price, boolean published, MultipartFile productImage) {
+    @Transactional
+    public RsData<Product> createProduct(String name, long price, boolean published, MultipartFile productImage) {
         // 제품 객체 생성 및 속성 설정
         Product product = Product.builder()
                 .name(name)
-                .description(description)
                 .price(price)
                 .published(published)
                 .build();
-
         // 제품 정보 저장
         productRepository.save(product);
 
-        // 제품 이미지 처리 로직 (예시)
+        // 제품 이미지 처리 로직
         if (productImage != null && !productImage.isEmpty()) {
-            // 이미지 파일 저장 및 제품 객체와 연결하는 로직 구현
+            String productImgFilePath = Ut.file.toFile(productImage, AppConfig.getTempDirPath());
+            genFileService.save(product.getModelName(), product.getId(), "product", "mainImage", 1, productImgFilePath);
         }
 
         // 성공 응답 반환
@@ -87,5 +87,11 @@ public class ProductService {
     @Transactional
     public void cancelBookmark(Member member, Product product) {
         productBookmarkService.cancelBookmark(member, product);
+    }
+
+    public String getProductImageUrl(long productId) {
+        return genFileService.findBy("Product", productId, "product", "mainImage", 1)
+                .map(file -> file.getUrl())
+                .orElse(null); // 이미지가 없을 경우 null 반환
     }
 }
