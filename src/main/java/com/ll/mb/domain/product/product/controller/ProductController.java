@@ -6,7 +6,9 @@ import com.ll.mb.domain.product.product.entity.ProductBookmark;
 import com.ll.mb.domain.product.product.service.ProductBookmarkService;
 import com.ll.mb.domain.product.product.service.ProductService;
 import com.ll.mb.global.rq.Rq;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,35 @@ public class ProductController {
     private final Rq rq;
     private final ProductService productService;
     private final ProductBookmarkService productBookmarkService;
+
+    @Getter
+    @Setter
+    public class ProductForm {
+        private String name;
+        private String description;
+        private long price;
+        private boolean published;
+        private MultipartFile productImage;
+    }
+
+    @PostMapping("/create")
+    public String createProduct(@ModelAttribute ProductForm productForm) {
+        try {
+            // 제품 생성 로직을 처리합니다. 필요한 경우 여기에 추가 데이터 변환 로직을 포함할 수 있습니다.
+            productService.createProduct(
+                    productForm.getName(),
+                    productForm.getDescription(),
+                    productForm.getPrice(),
+                    productForm.isPublished(),
+                    productForm.getProductImage()
+            );
+            return "redirect:/product/list";
+        } catch (Exception e) {
+            // 에러 처리 로직. 실제 사용 시 적절한 예외 처리와 로깅을 구현해야 합니다.
+            return "redirect:/product/create?error";
+        }
+    }
+
 
     @GetMapping("/bookmarkList")
     public String showBookmarkList() {

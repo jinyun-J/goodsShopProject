@@ -5,6 +5,9 @@ import com.ll.mb.domain.book.book.entity.Book;
 import com.ll.mb.domain.member.member.entity.Member;
 import com.ll.mb.domain.product.product.entity.Product;
 import com.ll.mb.domain.product.product.repository.ProductRepository;
+import com.ll.mb.global.app.AppConfig;
+import com.ll.mb.global.rsData.RsData;
+import com.ll.mb.standard.util.Ut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,24 +26,39 @@ public class ProductService {
     private final ProductBookmarkService productBookmarkService;
     private final GenFileService genFileService; // GenFileService 주입
 
-    @Transactional
-    public Product createProduct(Book book, boolean published, MultipartFile productImage) {
-        if (book.getProduct() != null) return book.getProduct();
-
+    public RsData<Product> createProduct(String name, String description, long price, boolean published, MultipartFile productImage) {
+        // 제품 객체 생성 및 속성 설정
         Product product = Product.builder()
-                .maker(book.getAuthor())
-                .relTypeCode(book.getModelName())
-                .relId(book.getId())
-                .name(book.getTitle())
-                .price(book.getPrice())
+                .name(name)
+                .description(description)
+                .price(price)
                 .published(published)
                 .build();
 
+        // 제품 정보 저장
         productRepository.save(product);
 
-        return product;
+        // 제품 이미지 처리 로직 (예시)
+        if (productImage != null && !productImage.isEmpty()) {
+            // 이미지 파일 저장 및 제품 객체와 연결하는 로직 구현
+        }
+
+        // 성공 응답 반환
+        return RsData.of("200", "제품이 성공적으로 생성되었습니다.", product);
     }
 
+    @Transactional
+    public void updateProductImage(long productId, MultipartFile productImage) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+        String productImgFilePath = Ut.file.toFile(productImage, AppConfig.getTempDirPath());
+        genFileService.save(product.getModelName(), product.getId(), "product", "mainImage", 1, productImgFilePath);
+    }
+
+    @Transactional
+    public void removeProductImage(long productId) {
+        genFileService.remove("Product", productId, "product", "mainImage", 1);
+    }
     public Optional<Product> findById(long id) {
         return productRepository.findById(id);
     }
@@ -70,22 +88,4 @@ public class ProductService {
     public void cancelBookmark(Member member, Product product) {
         productBookmarkService.cancelBookmark(member, product);
     }
-    @Transactional
-    public void saveProductImage(long productId, MultipartFile productImage) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
-
-        genFileService.save(product.getModelName(), product.getId(), "product", "mainImage", 0, productImage);
-    }
-
-    public Optional<String> getProductImageUrl(long productId) {
-        return genFileService.findBy("Product", productId, "product", "mainImage", 1)
-                .map(file -> file.getUrl());
-    }
-
-    @Transactional
-    public void removeProductImage(long productId) {
-        genFileService.remove("Product", productId, "product", "mainImage", 1);
-    }
-
 }
