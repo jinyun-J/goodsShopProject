@@ -28,7 +28,7 @@ public class Product extends BaseTime {
 
 
     public boolean isBook() {
-        return relTypeCode.equals("book");
+        return "book".equals(this.relTypeCode); // 이 방식은 relTypeCode가 null일 때도 안전합니다.
     }
 
     public Book getBook() {

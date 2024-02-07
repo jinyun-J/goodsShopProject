@@ -55,10 +55,15 @@ public class Member extends BaseTime {
     }
 
     public boolean has(Product product) {
-        return switch (product.getRelTypeCode()) {
-            case "book" -> hasBook(product.getBook());
-            default -> false;
-        };
+        // product.getRelTypeCode()가 null이 아닌 경우에만 비교 진행
+        if (product.getRelTypeCode() != null) {
+            return switch (product.getRelTypeCode()) {
+                case "book" -> product.getBook() != null && hasBook(product.getBook());
+                default -> false;
+            };
+        }
+        // product.getRelTypeCode()가 null인 경우, false 반환
+        return false;
     }
 
     @Transient

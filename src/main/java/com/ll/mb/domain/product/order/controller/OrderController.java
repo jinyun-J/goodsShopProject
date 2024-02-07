@@ -45,7 +45,7 @@ public class OrderController {
 
     @PostMapping("/directMakeOrder/{productId}")
     public String directMakeOrder(
-            @PathVariable("productId") long productId
+            @PathVariable(name = "productId") long productId
     ) {
         Product product = productService.findById(productId)
                 .orElseThrow(() -> new GlobalException("400", "존재하지 않는 상품입니다."));

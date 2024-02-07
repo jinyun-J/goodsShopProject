@@ -11,13 +11,11 @@
 <header layout:fragment="header">
     <nav class="navigation-bar">
         <!-- Navigation Links -->
-        <a class="nav-link" href="/book/list">책</a>
         <a class="nav-link" href="/product/list">상품</a>
         <a class="nav-link" th:if="${@rq.admin}" href="/adm">관리자 홈</a>
         <a class="nav-link" th:if="${@rq.login}" href="/product/bookmarkList">찜 상품</a>
         <a class="nav-link" th:if="${@rq.login}" href="/cart/list">장바구니</a>
         <a class="nav-link" th:if="${@rq.login}" href="/order/myList">주문</a>
-        <a class="nav-link" th:if="${@rq.login}" href="/book/myList">내 책</a>
         <a class="nav-link" th:if="${@rq.login}" href="/product/myList">내 상품</a>
         <a class="nav-link" th:if="${@rq.login}" href="/member/logout">로그아웃</a>
         <a class="nav-link" th:if="${@rq.logout}" href="/member/login">로그인</a>

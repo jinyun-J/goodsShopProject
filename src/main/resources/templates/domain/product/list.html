@@ -30,10 +30,9 @@
 
             <img th:if="${@productService.getProductImageUrl(product.id)}" th:src="@{${@productService.getProductImageUrl(product.id)}}" alt="Product Image" class="w-full h-64 object-cover mb-4">
 
-            <div class="text-center">
-                <h3 th:text="${product.name}" class="text-lg font-semibold mb-2"></h3>
-                <p th:text="${product.price}" class="text-gray-700 mb-4"></p>
-            </div>
+            <th:block th:replace="domain/product/fragments/productListItemCard :: productListItemCard(${product})"></th:block>
+
+
         </li>
     </ul>
 

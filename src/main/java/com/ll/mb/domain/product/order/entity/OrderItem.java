@@ -27,10 +27,19 @@ public class OrderItem extends BaseTime {
     private RebateItem rebateItem;
 
     public void setPaymentDone() {
-        switch (product.getRelTypeCode()) {
-            case "book" -> order.getBuyer().addMyBook(product.getBook());
+        if (product != null && product.getRelTypeCode() != null) {
+            switch (product.getRelTypeCode()) {
+                case "book":
+                    // book 관련 로직 처리
+                    if (order != null && order.getBuyer() != null && product.getBook() != null) {
+                        order.getBuyer().addMyBook(product.getBook());
+                    }
+                    break;
+                // 다른 case들에 대한 처리
+            }
         }
     }
+
 
     public void setCancelDone() {
     }
