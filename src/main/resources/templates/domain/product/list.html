@@ -4,26 +4,58 @@
 <head>
     <title>상품 리스트</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* 검색 폼 스타일 */
+        .search-form {
+            max-width: 600px; /* 폼의 최대 너비를 설정 */
+            margin: 0 auto; /* 상위 요소에 가운데 정렬 */
+            padding: 1rem; /* 폼 내부에 여백 추가 */
+            display: flex; /* 폼 요소들을 flexbox로 정렬 */
+            gap: 0.5rem; /* 요소들 사이의 간격 설정 */
+            align-items: center; /* 세로축 중앙 정렬 */
+        }
+        .search-form input[type="search"] {
+            flex-grow: 1; /* 검색 입력 필드가 남은 공간 모두 차지 */
+            padding: 0.5rem; /* 입력 필드 내부 여백 */
+            border: 1px solid #ccc; /* 테두리 설정 */
+            border-radius: 0.5rem; /* 둥근 모서리 */
+        }
+        .search-form input[type="submit"] {
+            padding: 0.5rem 1rem; /* 제출 버튼 내부 여백 */
+            background-color: #4CAF50; /* 배경색 설정 */
+            color: white; /* 텍스트 색상 */
+            border: none; /* 테두리 제거 */
+            border-radius: 0.5rem; /* 둥근 모서리 */
+            cursor: pointer; /* 마우스 오버시 커서 변경 */
+        }
+        /* 체크박스와 레이블 스타일 */
+        .checkbox-group {
+            display: flex;
+            gap: 0.5rem; /* 체크박스와 레이블 사이 간격 */
+        }
+         /* 오른쪽 아래 고정 버튼 스타일 */
+        .fixed-bottom-right {
+            position: fixed; /* 요소를 고정 위치에 배치 */
+            bottom: 1rem; /* 하단에서 1rem 떨어진 곳에 배치 */
+            right: 1rem; /* 오른쪽에서 1rem 떨어진 곳에 배치 */
+            z-index: 1000; /* 다른 요소 위에 오도록 z-index 설정 */
+        }
+    </style>
 </head>
 
 <body>
 
 <div layout:fragment="content">
-    <form class="flex items-center gap-2 mb-4 p-2 border-2 border-green-500 rounded-full">
-        <div class="flex-grow">
-            <input type="search" name="kw" placeholder="검색어" class="w-full bg-transparent focus:outline-none" th:value="${param.kw}">
-        </div>
-        <button type="submit" class="flex items-center justify-center p-2 rounded-full text-green-500 bg-white hover:bg-green-50">
-            <i class="fas fa-search"></i>
-        </button>
+    <!-- 검색 폼 -->
+    <form class="search-form">
+        <input type="search" name="kw" placeholder="상품명으로 검색해주세요" th:value="${param.kw}">
+        <input type="submit" value="검색">
     </form>
 
     <!-- 상품 등록 버튼 -->
-    <div class="my-3">
-        <a th:href="@{/product/create}" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-700">
-            상품 등록
-        </a>
-    </div>
+    <a th:href="@{/product/create}" class="py-2 px-4 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-700 fixed-bottom-right">
+        상품 등록
+    </a>
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <li th:each="product : ${itemPage.content}" class="card bg-white shadow-md rounded-lg overflow-hidden p-4">
