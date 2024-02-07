@@ -18,6 +18,7 @@
 
     <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <li class="card bg-base-100 shadow-xl" th:each="product : ${itemPage.content}">
+            <img th:if="${@productService.getProductImageUrl(product.id)}" th:src="@{${@productService.getProductImageUrl(product.id)}}" alt="Product Image" class="w-full h-64 object-cover mb-4">
             <th:block th:replace="domain/product/fragments/productListItemCard :: productListItemCard(${product})"></th:block>
         </li>
     </ul>

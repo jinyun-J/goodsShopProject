@@ -11,6 +11,10 @@
 <div layout:fragment="content">
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         <li th:each="productBookmark : ${productBookmarks}" class="card bg-white shadow-lg rounded-lg overflow-hidden">
+            <!-- 여기서 productBookmark.product를 참조하여 조건 확인 -->
+            <img th:if="${@productService.getProductImageUrl(productBookmark.product.id)}"
+                 th:src="@{${@productService.getProductImageUrl(productBookmark.product.id)}}"
+                 alt="Product Image" class="w-full h-64 object-cover mb-4">
             <th:block th:replace="domain/product/fragments/productListItemCard :: productListItemCard(${productBookmark.product})"></th:block>
         </li>
     </ul>

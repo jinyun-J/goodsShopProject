@@ -11,16 +11,17 @@
 
     <ul class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <li class="card bg-base-100 shadow-xl" th:each="cartItem : ${cartItems}">
-            <th:block
-                    th:replace="domain/product/fragments/productListItemCard :: productListItemCard(${cartItem.product})"></th:block>
+            <img th:if="${@productService.getProductImageUrl(cartItem.product.id)}"
+                 th:src="@{${@productService.getProductImageUrl(cartItem.product.id)}}"
+                 alt="Product Image" class="w-full h-64 object-cover mb-4">
+            <th:block th:replace="domain/product/fragments/productListItemCard :: productListItemCard(${cartItem.product})"></th:block>
         </li>
     </ul>
 
     <div class="flex justify-center mt-3">
-        <a href="/order/createFromCart" method="POST" class="btn btn-primary">
+        <a href="/order/createFromCart" class="btn btn-primary">
             <span>주문</span>
             <span>총액 : <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</span>
-
         </a>
     </div>
 

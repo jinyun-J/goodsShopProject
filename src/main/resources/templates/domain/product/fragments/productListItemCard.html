@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-</head>
-
-<body>
-
 <th:block th:fragment="productListItemCard(product)">
     <div class="card-body">
         <h2 class="card-title">
@@ -48,7 +39,7 @@
             <a
                     method="POST"
                     th:if="${@cartService.canAdd(@rq.member, product)}"
-                    th:href="|/cart/add/${product.id}?redirectUrl=${@rq.encodedCurrentUrl}|"
+                    th:href="@{|/cart/add/${product.id}?redirectUrl=${@rq.encodedCurrentUrl}|}"
                     class="btn btn-sm btn-outline"
             >
                 장바구니
@@ -57,7 +48,7 @@
             <a
                     method="DELETE"
                     th:if="${@cartService.canRemove(@rq.member, product)}"
-                    th:href="|/cart/remove/${product.id}?redirectUrl=${@rq.encodedCurrentUrl}|"
+                    th:href="@{|/cart/remove/${product.id}?redirectUrl=${@rq.encodedCurrentUrl}|}"
                     class="btn btn-sm"
             >
                 장바구니
@@ -65,5 +56,3 @@
         </div>
     </div>
 </th:block>
-</body>
-</html>
