@@ -1,12 +1,10 @@
 <th:block th:fragment="productListItemCard(product)">
     <div class="card-body">
-        <h2 class="card-title">
-            <span th:text="${product.id}"></span>
-            <span>:</span>
+        <h2 class="card-title font-warhaven">
             <span th:text="${product.name}"></span>
         </h2>
 
-        <div>
+        <div class="font-warhaven">
             <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span><span>원</span>
         </div>
 
