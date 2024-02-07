@@ -4,39 +4,70 @@
 <head>
     <title>내 정보</title>
     <style>
-        /* 여기에 필요한 CSS 스타일 추가 */
-        .info-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 1rem;
-            background-color: #f7f7f7;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        body {
+            font-family: 'Noto Sans', sans-serif; /* 폰트 변경 */
+            background-color: #87CEEB; /* 배경 색상 변경 */
+            color: #333; /* 글자 색상 조정 */
         }
-        .info-container div {
-            margin-bottom: 0.5rem;
-        }
-        .info-container div > div:first-child {
-            font-weight: bold;
-        }
-        .btn-container {
-            margin-top: 1rem;
+
+        .text-center {
             text-align: center;
         }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .text-xl {
+            font-size: 1.25rem; /* 제목 크기 조정 */
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem; /* 마진 조정 */
+        }
+
+        .info-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 2rem;
+            background-color: #ffffff; /* 배경 색상 변경 */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 그림자 효과 강화 */
+            border: 1px solid #e0e0e0; /* 테두리 추가 */
+        }
+
+        .info-container div {
+            margin-bottom: 1rem; /* 간격 조정 */
+            padding: 0.5rem 0; /* 패딩 추가 */
+        }
+
+        .info-container div > div:first-child {
+            font-weight: bold;
+            color: #555; /* 글자 색상 조정 */
+        }
+
+        .btn-container {
+            margin-top: 2rem; /* 버튼 컨테이너 상단 마진 조정 */
+            text-align: center;
+        }
+
         .btn {
-            padding: 0.5rem 1rem;
-            background-color: #4CAF50;
+            padding: 0.75rem 1.5rem; /* 버튼 패딩 조정 */
+            background-color: #007bff; /* 버튼 색상 변경 */
             color: white;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 5px; /* 버튼 모서리 둥글게 */
             cursor: pointer;
-            text-decoration: none; /* <a> 태그의 기본 밑줄 스타일 제거 */
+            text-decoration: none; /* 밑줄 제거 */
+            transition: background-color 0.3s ease; /* 호버 효과 부드럽게 */
         }
+
         .btn:hover {
-            background-color: #45a049;
+            background-color: #0056b3; /* 버튼 호버 색상 변경 */
         }
     </style>
 </head>
+
 
 <body>
 

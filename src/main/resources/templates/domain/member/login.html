@@ -1,55 +1,56 @@
+<!DOCTYPE html>
 <html layout:decorate="~{global/usrLayout}">
 
 <head>
     <title>로그인</title>
+    <!-- 테일윈드 CSS CDN 추가 예정 -->
 </head>
 
-<body>
+<body class="flex items-center justify-center h-screen bg-blue-100">
+<div layout:fragment="content" class="w-full max-w-xs m-auto">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <h1 class="block text-gray-700 text-lg font-bold mb-2">로그인</h1>
 
-<div layout:fragment="content">
-    <h1>로그인</h1>
+        <form th:action method="POST" onsubmit="submitLoginForm(this); return false;" class="space-y-4">
+            <div>
+                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">사용자 ID</label>
+                <input type="text" name="username" id="username" class="input input-bordered w-full px-3 py-2 rounded shadow" placeholder="사용자 ID">
+            </div>
 
-    <script>
-        function submitLoginForm(form) {
-            form.username.value = form.username.value.trim();
+            <div>
+                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">비밀번호</label>
+                <input type="password" name="password" id="password" class="input input-bordered w-full px-3 py-2 rounded shadow" placeholder="비밀번호">
+            </div>
 
-            if (form.username.value.length == 0) {
-                toastWarning('사용자 ID를 입력해주세요.');
-                form.username.focus();
-                return;
-            }
-
-            form.password.value = form.password.value.trim();
-
-            if (form.password.value.length == 0) {
-                toastWarning('비밀번호를 입력해주세요.');
-                form.password.focus();
-                return;
-            }
-
-            form.submit();
-        }
-    </script>
-
-    <form th:action method="POST" onsubmit="submitLoginForm(this); return false;">
-        <div>
-            <label>사용자 ID</label>
-            <input type="text" name="username" class="input input-bordered">
+            <button class="btn btn-primary w-full py-2 px-4 rounded bg-blue-500 hover:bg-blue-700 text-white font-bold" type="submit">로그인</button>
+        </form>
+        <div class="mt-4 flex justify-center space-y-4 w-full">
+            <a class="btn btn-primary w-full py-2 px-4 rounded bg-yellow-400 hover:bg-yellow-500 text-white font-bold text-center" href="/oauth2/authorization/kakao">
+                카카오 로그인
+            </a>
         </div>
-
-        <div>
-            <label>비밀번호</label>
-            <input type="password" name="password" class="input input-bordered">
-        </div>
-
-        <button class="btn btn-primary" type="submit">로그인</button>
-
-        <a class="btn btn-primary" href="/oauth2/authorization/kakao">
-            카카오 로그인
-        </a>
-    </form>
+    </div>
 </div>
 
-</body>
+<script>
+    function submitLoginForm(form) {
+        form.username.value = form.username.value.trim();
+        if (form.username.value.length == 0) {
+            toastWarning('사용자 ID를 입력해주세요.');
+            form.username.focus();
+            return;
+        }
 
+        form.password.value = form.password.value.trim();
+        if (form.password.value.length == 0) {
+            toastWarning('비밀번호를 입력해주세요.');
+            form.password.focus();
+            return;
+        }
+
+        form.submit();
+    }
+</script>
+
+</body>
 </html>
