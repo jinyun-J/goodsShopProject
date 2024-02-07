@@ -1,65 +1,94 @@
+<!DOCTYPE html>
 <html layout:decorate="~{global/usrLayout}">
 
 <head>
     <title>출금신청</title>
+    <style>
+        /* 여기에 페이지 전반에 적용될 스타일을 추가하세요. */
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group button {
+            background-color: #f3f3f3;
+            border: 1px solid #ddd;
+        }
+        .form-group button:hover {
+            background-color: #e7e7e7;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+    </style>
 </head>
 
 <body>
 
-<div layout:fragment="content">
-    <h1>출금신청</h1>
+<div layout:fragment="content" class="container">
+    <h1 class="text-center">출금신청</h1>
 
-    <form th:action method="POST" class="flex flex-col gap-2 mt-2">
-        <div>
-            <div>아이디</div>
-            <div>
-                <span th:text="${@rq.member.username}"></span>
-            </div>
+    <form th:action="@{/withdraw/apply}" method="POST" class="mt-2">
+        <div class="form-group">
+            <label for="username">아이디</label>
+            <input type="text" id="username" th:value="${@rq.member.username}" disabled>
         </div>
 
-        <div>
-            <div>보유캐시</div>
-            <div>
-                <span th:text="${@rq.member.restCash}"></span>
-            </div>
+        <div class="form-group">
+            <label for="restCash">보유캐시</label>
+            <input type="text" id="restCash" th:value="${@rq.member.restCash}" disabled>
         </div>
 
-        <div>
-            <div>은행명</div>
-            <div>
-                <select name="bankName" class="select select-bordered" required>
-                    <option value="" disabled selected>은행</option>
-                    <option value="국민은행">국민은행</option>
-                    <option value="기업은행">기업은행</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <label for="bankName">은행명</label>
+            <select id="bankName" name="bankName" class="select select-bordered" required>
+                <option value="" disabled selected>은행을 선택하세요</option>
+                <option value="국민은행">국민은행</option>
+                <option value="기업은행">기업은행</option>
+                <!-- 추가 은행명 -->
+            </select>
         </div>
 
-        <div>
-            <div>계좌번호</div>
-            <div>
-                <input class="input input-bordered" type="text" name="bankAccountNo" placeholder="은행계좌번호, - 없이 입력해주세요." required>
-            </div>
+        <div class="form-group">
+            <label for="bankAccountNo">계좌번호</label>
+            <input id="bankAccountNo" class="input input-bordered" type="text" name="bankAccountNo" placeholder="- 없이 입력해주세요." required>
         </div>
 
-        <div>
-            <div>출금캐시</div>
-            <div>
-                <input type="number" th:max="${@rq.member.restCash}" class="input input-bordered" name="cash"
-                       placeholder="출금액" required>
-            </div>
+        <div class="form-group">
+            <label for="cash">출금캐시</label>
+            <input id="cash" type="number" th:max="${@rq.member.restCash}" class="input input-bordered" name="cash" placeholder="출금액을 입력하세요" required>
         </div>
 
-        <div>
-            <div>출금신청</div>
-            <div>
-                <input type="submit" class="btn btn-sm btn-primary" value="출금신청">
-            </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="출금신청">
         </div>
     </form>
 
-    <div>
-        <button onclick="history.back();" class="btn btn-sm">뒤로가기</button>
+    <div class="form-group">
+        <button onclick="history.back();" class="btn">뒤로가기</button>
     </div>
 
 </div>
