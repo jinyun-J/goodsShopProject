@@ -24,7 +24,7 @@
     </ul>
 
     <div class="flex justify-center mt-6 mb-4">
-        <a href="/order/createFromCart" class="btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg">
+        <a href="/order/createFromCart" method="POST" class="btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg">
             <span class="text-lg">주문하기</span>
             <span class="block text-sm mt-2">총액 : <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>원</span>
         </a>
